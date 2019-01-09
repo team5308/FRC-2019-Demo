@@ -13,6 +13,8 @@
 
 // begin define
 
+bool Drive::isExcute = false;
+
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax1;
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax2;
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax3;
@@ -26,6 +28,9 @@ std::shared_ptr<frc::SpeedControllerGroup> Drive::rightGroup;
 
 void Drive::init()
 {
+  if(isExcute)  return;
+  else isExcute = true;
+
   sparkMax1.reset(new rev::CANSparkMax(1));
   sparkMax2.reset(new rev::CANSparkMax(2));
   sparkMax3.reset(new rev::CANSparkMax(3));
@@ -37,8 +42,6 @@ void Drive::init()
   leftGroup  = std::make_shared<frc::SpeedControllerGroup>(*sparkMax1, *sparkMax2, *sparkMax3);
 
   rightGroup = std::make_shared<frc::SpeedControllerGroup>(*sparkMax4, *sparkMax5, *sparkMax6);
-
-
 }
 
 Drive::Drive() : frc::Subsystem("Drive") 
