@@ -14,6 +14,9 @@
 
 class Drive : public frc::Subsystem {
  public:
+
+ static void init();
+
  static std::shared_ptr<rev::CANSparkMax> sparkMax1;
  static std::shared_ptr<rev::CANSparkMax> sparkMax2;
  static std::shared_ptr<rev::CANSparkMax> sparkMax3;
@@ -24,6 +27,7 @@ class Drive : public frc::Subsystem {
 
  static std::shared_ptr<frc::SpeedControllerGroup> leftGroup;
  static std::shared_ptr<frc::SpeedControllerGroup> rightGroup;
+
 
   Drive();
   void InitDefaultCommand() override;
