@@ -32,5 +32,3 @@ constexpr int driveLeftSparkMax3 = 3;
 constexpr int driveRightSparkMax1 = 4;
 constexpr int driveRightSparkMax2 = 5;
 constexpr int driveRightSparkMax3 = 6;
-
-

@@ -8,11 +8,24 @@
 
 #pragma once
 
-#include <frc/commands/Subsystem.h>
+#include "commands/Subsystem.h"
+#include  "ytz_5308.h"
+#include "rev/CANSparkMax.h"
 
-class DriveSubsystem : public frc::Subsystem {
+class Drive : public frc::Subsystem {
  public:
-  DriveSubsystem();
+ static std::shared_ptr<rev::CANSparkMax> sparkMax1;
+ static std::shared_ptr<rev::CANSparkMax> sparkMax2;
+ static std::shared_ptr<rev::CANSparkMax> sparkMax3;
+
+ static std::shared_ptr<rev::CANSparkMax> sparkMax4;
+ static std::shared_ptr<rev::CANSparkMax> sparkMax5;
+ static std::shared_ptr<rev::CANSparkMax> sparkMax6;
+
+ static std::shared_ptr<frc::SpeedControllerGroup> leftGroup;
+ static std::shared_ptr<frc::SpeedControllerGroup> rightGroup;
+
+  Drive();
   void InitDefaultCommand() override;
   void Periodic() override;
 
