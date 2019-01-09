@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "commands/Subsystem.h"
+#include "frc/commands/Subsystem.h"
 #include  "ytz_5308.h"
 #include "rev/CANSparkMax.h"
 
@@ -16,6 +16,8 @@ class Drive : public frc::Subsystem {
  public:
 
  static void init();
+
+ static bool isExcute;
 
  static std::shared_ptr<rev::CANSparkMax> sparkMax1;
  static std::shared_ptr<rev::CANSparkMax> sparkMax2;
