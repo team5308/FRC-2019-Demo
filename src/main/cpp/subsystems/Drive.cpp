@@ -31,13 +31,13 @@ void Drive::init()
   if(isExcute)  return;
   else isExcute = true;
 
-  sparkMax1.reset(new rev::CANSparkMax(1));
-  sparkMax2.reset(new rev::CANSparkMax(2));
-  sparkMax3.reset(new rev::CANSparkMax(3));
+  sparkMax1.reset(new rev::CANSparkMax(1, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
+  sparkMax2.reset(new rev::CANSparkMax(2, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
+  sparkMax3.reset(new rev::CANSparkMax(3, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
   
-  sparkMax4.reset(new rev::CANSparkMax(4));
-  sparkMax5.reset(new rev::CANSparkMax(5));
-  sparkMax6.reset(new rev::CANSparkMax(6));
+  sparkMax4.reset(new rev::CANSparkMax(4, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
+  sparkMax5.reset(new rev::CANSparkMax(5, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
+  sparkMax6.reset(new rev::CANSparkMax(6, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
 
   leftGroup  = std::make_shared<frc::SpeedControllerGroup>(*sparkMax1, *sparkMax2, *sparkMax3);
 
