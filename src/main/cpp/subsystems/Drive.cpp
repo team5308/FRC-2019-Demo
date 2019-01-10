@@ -26,6 +26,9 @@ std::shared_ptr<rev::CANSparkMax> Drive::sparkMax6;
 std::shared_ptr<frc::SpeedControllerGroup> Drive::leftGroup;
 std::shared_ptr<frc::SpeedControllerGroup> Drive::rightGroup;
 
+std::shared_ptr<frc::Joystick> Drive::joy1;
+std::shared_ptr<frc::Joystick> Drive::joy2;
+
 void Drive::init()
 {
   if(isExcute)  return;
@@ -40,13 +43,15 @@ void Drive::init()
   sparkMax6.reset(new rev::CANSparkMax(6, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
 
   leftGroup  = std::make_shared<frc::SpeedControllerGroup>(*sparkMax1, *sparkMax2, *sparkMax3);
-
   rightGroup = std::make_shared<frc::SpeedControllerGroup>(*sparkMax4, *sparkMax5, *sparkMax6);
+
+  joy1.reset(new frc::Joystick(0));
+  joy2.reset(new frc::Joystick(1));
 }
 
 Drive::Drive() : frc::Subsystem("Drive") 
 {
-
+  
 }
 
 void Drive::InitDefaultCommand() {
@@ -56,7 +61,8 @@ void Drive::InitDefaultCommand() {
 
 void Drive::Periodic() 
 {
-  
+  leftGroup->Set(joy1.GetX());
+  rightGroup->Set(joy2.GetX());
 }
 
 // Put methods for controlling this subsystem

@@ -30,6 +30,9 @@ class Drive : public frc::Subsystem {
  static std::shared_ptr<frc::SpeedControllerGroup> leftGroup;
  static std::shared_ptr<frc::SpeedControllerGroup> rightGroup;
 
+ static std::shared_ptr<frc::Joystick> joy1;
+ static std::shared_ptr<frc::Joystick> joy2;
+
 
   Drive();
   void InitDefaultCommand() override;
