@@ -14,7 +14,7 @@ PID::PID() : Subsystem("PID")
 
 }
 
-PID::PID(int kP, int kI, int kD) : Subsystem("PID"), kP(kP), kI(kI),kD(kD)
+PID::PID(double kP, double kI, double kD) : Subsystem("PID"), kP(kP), kI(kI),kD(kD)
 {
 
 }
@@ -27,6 +27,10 @@ void PID::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void PID::updCurPhase()
+{
+  // Ju Ti Shi Xian
+}
 
 void PID::enable()
 {
@@ -38,5 +42,19 @@ void PID::enable()
 
 void PID::step()
 {
-  
+  updCurPhase();
+  cDelPhase = cPhase - basePhase;
+  float speed = kP * cDelPhase + kI * errD;
+
+  output(speed);
+
+  errD += cDelPhase;
+  idx++;
+}
+
+
+bool PID::output(double para)
+{
+  std::cout << "para: " << para <<"\noutput() need to be implemented.\n";
+  return false;
 }

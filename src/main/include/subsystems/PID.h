@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2019-2020 FRC Team 5308. All Rights Reserved.                */
 /* Author: Cetian Liu                                                          */
-/* Date: 2019/01/08                                                           */
+/* Date: 2019/01/10                                                           */
 /* Filename: PID.h                                                            */
 /* Project: FRC-2019-Demo                                                     */
 /*----------------------------------------------------------------------------*/
@@ -10,6 +10,7 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 #include <frc/commands/Subsystem.h>
 
@@ -21,9 +22,10 @@ class PID : public frc::Subsystem {
 
   int basePhase; // Phase reader at the beginning
   int targetPhase; // Target End Phase
-  int cPhase; // current distance
+  int cPhase; // current phase
+  int cDelPhase; // displacement phase
 
-  std::vector<int> err;
+  int errD;
 
   int kP,kI,kD;
 
@@ -31,10 +33,13 @@ class PID : public frc::Subsystem {
 
  public:
   PID();
-  PID(int, int, int );
+  PID(double, double, double );
 
+  void updCurPhase();
   void enable();
   void step();
+
+  virtual bool output(double);
 
   void InitDefaultCommand() override;
 };
