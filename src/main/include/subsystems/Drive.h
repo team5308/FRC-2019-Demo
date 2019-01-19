@@ -11,6 +11,7 @@
 #include <frc/commands/Subsystem.h>
 #include  "ytz_5308.h"
 #include "rev/CANSparkMax.h"
+#include "rev/SparkMax.h"
 
 class Drive : public frc::Subsystem {
  public:
@@ -19,7 +20,7 @@ class Drive : public frc::Subsystem {
 
  static bool isExcute;
 
- static std::shared_ptr<rev::CANSparkMax> sparkMax1;
+ static std::shared_ptr<rev::SparkMax> sparkMax1;
  static std::shared_ptr<rev::CANSparkMax> sparkMax2;
  static std::shared_ptr<rev::CANSparkMax> sparkMax3;
 
