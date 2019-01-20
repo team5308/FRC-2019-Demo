@@ -19,13 +19,7 @@ class Drive : public frc::Subsystem {
 
  static bool isExcute;
 
- static std::shared_ptr<rev::CANSparkMax> sparkMax1;
- static std::shared_ptr<rev::CANSparkMax> sparkMax2;
- static std::shared_ptr<rev::CANSparkMax> sparkMax3;
-
- static std::shared_ptr<rev::CANSparkMax> sparkMax4;
- static std::shared_ptr<rev::CANSparkMax> sparkMax5;
- static std::shared_ptr<rev::CANSparkMax> sparkMax6;
+ static std::shared_ptr<>;
 
  static std::shared_ptr<frc::SpeedControllerGroup> leftGroup;
  static std::shared_ptr<frc::SpeedControllerGroup> rightGroup;
