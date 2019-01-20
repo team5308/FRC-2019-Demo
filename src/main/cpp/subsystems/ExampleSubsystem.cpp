@@ -19,6 +19,8 @@ std::shared_ptr<WPI_TalonSRX> ExampleSubsystem::TalonSRX3;
 std::shared_ptr<WPI_TalonSRX> ExampleSubsystem::TalonSRX4;
 std::shared_ptr<frc::SpeedControllerGroup> ExampleSubsystem::SpeedControllerGroup2;
 
+std::shared_ptr<frc::DifferentialDrive> ExampleSubsystem::m_robotDrive;
+
 ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   joystick1.reset(new frc::Joystick(0));
 
@@ -33,6 +35,7 @@ ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
 
   //frc::DifferentialDrive m_robotDrive{SpeedControllerGroup1, SpeedControllerGroup2};
   m_robotDrive.reset(new frc::DifferentialDrive(*SpeedControllerGroup1, *SpeedControllerGroup2));
+
 }
 
 void ExampleSubsystem::InitDefaultCommand() {
