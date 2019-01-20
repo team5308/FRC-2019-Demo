@@ -61,8 +61,8 @@ void Drive::InitDefaultCommand() {
 
 void Drive::Periodic() 
 {
-  leftGroup->Set(joy1.GetX());
-  rightGroup->Set(joy2.GetX());
+  leftGroup->Set(joy1->GetX());
+  rightGroup->Set(joy2->GetX());
 }
 
 // Put methods for controlling this subsystem
