@@ -11,6 +11,8 @@
 #include <frc/TimedRobot.h>
 #include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <frc/smartdashboard/SmartdashBoard.h>
+#include <networktables/NetworkTable.h>
 
 #include "OI.h"
 #include "commands/ExampleCommand.h"
@@ -25,6 +27,8 @@ class Robot : public frc::TimedRobot {
   static OI m_oi;
   RevDigit revDigit;
 
+  std::shared_ptr<NetworkTable> limeTable;
+  
   void RobotInit() override;
   void RobotPeriodic() override;
   void DisabledInit() override;

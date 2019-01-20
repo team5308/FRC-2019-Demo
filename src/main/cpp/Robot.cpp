@@ -11,6 +11,11 @@
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
+#include <frc/smartdashboard/SmartdashBoard.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
+
+
 ExampleSubsystem Robot::m_subsystem;
 Drive Robot::drive;
 OI Robot::m_oi;
@@ -21,6 +26,15 @@ void Robot::RobotInit() {
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
   revDigit.Init();
   revDigit.Display("5308");
+  
+  //limetable
+  limeTable = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+  double targetSet_Horizontal = limeTable->GetNumber("tx", 0.0);
+  double targetSet_Vertical   = limeTable->GetNumber("ty", 0.0);
+
+  double targetArea = limeTable->GetNumber("ta", 0.0);
+  double targetSkew = limeTable->GetNumber("ts", 0.0);
+
 }
 
 /**

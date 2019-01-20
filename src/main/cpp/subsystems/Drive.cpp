@@ -15,7 +15,7 @@
 
 bool Drive::isExcute = false;
 
-std::shared_ptr<rev::SparkMax> Drive::sparkMax1;
+std::shared_ptr<rev::CANSparkMax> Drive::sparkMax1;
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax2;
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax3;
 
@@ -28,15 +28,19 @@ std::shared_ptr<frc::SpeedControllerGroup> Drive::rightGroup;
 
 std::shared_ptr<frc::Joystick> Drive::joy1;
 std::shared_ptr<frc::Joystick> Drive::joy2;
+std::shared_ptr<frc::Encoder> Drive::testEncoder;
 
 void Drive::init()
 {
   if(isExcute)  return;
   else isExcute = true;
 
-  sparkMax1.reset(new rev::SparkMax(0));
-
+  sparkMax1.reset(new rev::CANSparkMax(0, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
   
+  testEncoder.reset(new frc::Encoder(0,1));
+
+  testEncoder -> SetDistancePerPulse(0.00390625);
+
   joy1.reset(new frc::Joystick(0));
   joy2.reset(new frc::Joystick(1));
 }
@@ -57,6 +61,7 @@ void Drive::Periodic()
   double l = joy1->GetY();
   printf("%f\n",l);
   sparkMax1 -> Set(l);
+  printf("Encoder: %f\n", testEncoder->GetDistance());
   // leftGroup->Set(joy1.GetX());
   // rightGroup->Set(joy2.GetX());
 }

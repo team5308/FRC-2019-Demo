@@ -20,7 +20,7 @@ class Drive : public frc::Subsystem {
 
  static bool isExcute;
 
- static std::shared_ptr<rev::SparkMax> sparkMax1;
+ static std::shared_ptr<rev::CANSparkMax> sparkMax1;
  static std::shared_ptr<rev::CANSparkMax> sparkMax2;
  static std::shared_ptr<rev::CANSparkMax> sparkMax3;
 
@@ -33,6 +33,9 @@ class Drive : public frc::Subsystem {
 
  static std::shared_ptr<frc::Joystick> joy1;
  static std::shared_ptr<frc::Joystick> joy2;
+
+
+ static std::shared_ptr<frc::Encoder> testEncoder;
 
 
   Drive();
