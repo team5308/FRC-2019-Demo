@@ -15,7 +15,7 @@ class ExampleSubsystem : public frc::Subsystem {
  public:
   ExampleSubsystem();
   void InitDefaultCommand() override;
-  void Periodic();
+  void Periodic() override;
   
   static std::shared_ptr<frc::Joystick> joystick1;
 

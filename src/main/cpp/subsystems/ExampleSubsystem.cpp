@@ -32,7 +32,7 @@ ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   SpeedControllerGroup2 = std::make_shared<frc::SpeedControllerGroup>(*TalonSRX3, *TalonSRX4);
 
   //frc::DifferentialDrive m_robotDrive{SpeedControllerGroup1, SpeedControllerGroup2};
-  m_robotDrive = std::make_shared<frc::DifferentialDrive>(*SpeedControllerGroup1, *SpeedControllerGroup2);
+  m_robotDrive.reset(new frc::DifferentialDrive(*SpeedControllerGroup1, *SpeedControllerGroup2));
 }
 
 void ExampleSubsystem::InitDefaultCommand() {
@@ -41,7 +41,7 @@ void ExampleSubsystem::InitDefaultCommand() {
 }
 
 void ExampleSubsystem::Periodic(){
-m_robotDrive->ArcadeDrive(joystick1->GetY(), joystick1->GetX());
+  m_robotDrive -> ArcadeDrive(-joystick1->GetX(), joystick1->GetX());
 }
 
 

@@ -12,7 +12,6 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 ExampleSubsystem Robot::m_subsystem;
-Drive Robot::drive;
 OI Robot::m_oi;
 
 void Robot::RobotInit() {
