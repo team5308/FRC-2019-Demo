@@ -23,12 +23,3 @@
 // number and the module. For example you with a rangefinder:
 // constexpr int kRangeFinderPort = 1;
 // constexpr int kRangeFinderModule = 1;
-
-constexpr int driveLeftSparkMax1 = 1;
-constexpr int driveLeftSparkMax2 = 2;
-constexpr int driveLeftSparkMax3 = 3;
-
-
-constexpr int driveRightSparkMax1 = 4;
-constexpr int driveRightSparkMax2 = 5;
-constexpr int driveRightSparkMax3 = 6;

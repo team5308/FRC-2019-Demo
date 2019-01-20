@@ -10,4 +10,6 @@
 class OI {
  public:
   OI();
+
+  private:
 };

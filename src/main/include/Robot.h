@@ -1,9 +1,8 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019-2020 FRC Team 5308. All Rights Reserved.                */
-/* Author: Cetian Liu                                                          */
-/* Date: 2019/01/08                                                           */
-/* Filename: DriveSubSystem.cpp                                               */
-/* Project: FRC-2019-Demo                                                     */
+/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
 #pragma once
@@ -16,12 +15,10 @@
 #include "commands/ExampleCommand.h"
 #include "commands/MyAutoCommand.h"
 #include "subsystems/ExampleSubsystem.h"
-#include "subsystems/Drive.h"
 
 class Robot : public frc::TimedRobot {
  public:
   static ExampleSubsystem m_subsystem;
-  static Drive drive;
   static OI m_oi;
 
   void RobotInit() override;
