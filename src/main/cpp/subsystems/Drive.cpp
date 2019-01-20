@@ -19,6 +19,8 @@ std::shared_ptr<rev::CANSparkMax> Drive::sparkMax1;
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax2;
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax3;
 
+std::shared_ptr<rev::CANEncoder> Drive::sparkEncoder1;
+
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax4;
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax5;
 std::shared_ptr<rev::CANSparkMax> Drive::sparkMax6;
@@ -28,6 +30,7 @@ std::shared_ptr<frc::SpeedControllerGroup> Drive::rightGroup;
 
 std::shared_ptr<frc::Joystick> Drive::joy1;
 std::shared_ptr<frc::Joystick> Drive::joy2;
+
 std::shared_ptr<frc::Encoder> Drive::testEncoder;
 
 void Drive::init()
@@ -37,8 +40,9 @@ void Drive::init()
 
   sparkMax1.reset(new rev::CANSparkMax(0, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
   
-  testEncoder.reset(new frc::Encoder(0,1));
+  sparkEncoder1.reset(new rev::CANEncoder(*sparkMax1));
 
+  testEncoder.reset(new frc::Encoder(0,1));
   testEncoder -> SetDistancePerPulse(0.00390625);
 
   joy1.reset(new frc::Joystick(0));

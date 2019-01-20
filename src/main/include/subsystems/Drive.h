@@ -12,6 +12,7 @@
 #include  "ytz_5308.h"
 #include "rev/CANSparkMax.h"
 #include "rev/SparkMax.h"
+#include "rev/CANEncoder.h"
 
 class Drive : public frc::Subsystem {
  public:
@@ -37,6 +38,7 @@ class Drive : public frc::Subsystem {
 
  static std::shared_ptr<frc::Encoder> testEncoder;
 
+ static std::shared_ptr<rev::CANEncoder> sparkEncoder1;
 
   Drive();
   void InitDefaultCommand() override;
