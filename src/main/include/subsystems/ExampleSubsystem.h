@@ -20,11 +20,11 @@ class ExampleSubsystem : public frc::Subsystem {
   static std::shared_ptr<frc::Joystick> joystick1;
 
   static std::shared_ptr<WPI_TalonSRX>  TalonSRX1;
-  static std::shared_ptr<WPI_TalonSRX>  TalonSRX2;
+  static std::shared_ptr<WPI_VictorSPX>  VictorSPX2;
   static std::shared_ptr<frc::SpeedControllerGroup> SpeedControllerGroup1;
 
   static std::shared_ptr<WPI_TalonSRX>  TalonSRX3;
-  static std::shared_ptr<WPI_TalonSRX>  TalonSRX4;
+  static std::shared_ptr<WPI_VictorSPX>  VictorSPX4;
   static std::shared_ptr<frc::SpeedControllerGroup> SpeedControllerGroup2;
 
   static std::shared_ptr<frc::DifferentialDrive>  m_robotDrive;

@@ -12,11 +12,11 @@
 std::shared_ptr<frc::Joystick> ExampleSubsystem::joystick1;
 
 std::shared_ptr<WPI_TalonSRX> ExampleSubsystem::TalonSRX1;
-std::shared_ptr<WPI_TalonSRX> ExampleSubsystem::TalonSRX2;
+std::shared_ptr<WPI_VictorSPX> ExampleSubsystem::VictorSPX2;
 std::shared_ptr<frc::SpeedControllerGroup> ExampleSubsystem::SpeedControllerGroup1;
 
 std::shared_ptr<WPI_TalonSRX> ExampleSubsystem::TalonSRX3;
-std::shared_ptr<WPI_TalonSRX> ExampleSubsystem::TalonSRX4;
+std::shared_ptr<WPI_VictorSPX> ExampleSubsystem::VictorSPX4;
 std::shared_ptr<frc::SpeedControllerGroup> ExampleSubsystem::SpeedControllerGroup2;
 
 std::shared_ptr<frc::DifferentialDrive> ExampleSubsystem::m_robotDrive;
@@ -25,13 +25,13 @@ ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   joystick1.reset(new frc::Joystick(0));
 
   TalonSRX1.reset(new WPI_TalonSRX(0));
-  TalonSRX2.reset(new WPI_TalonSRX(1));
+  VictorSPX2.reset(new WPI_VictorSPX(1));
   //2 spx follow 2 srx mastermode
   TalonSRX3.reset(new WPI_TalonSRX(2));
-  TalonSRX4.reset(new WPI_TalonSRX(3));
+  VictorSPX4.reset(new WPI_VictorSPX(3));
 
-  SpeedControllerGroup1 = std::make_shared<frc::SpeedControllerGroup>(*TalonSRX1, *TalonSRX2);
-  SpeedControllerGroup2 = std::make_shared<frc::SpeedControllerGroup>(*TalonSRX3, *TalonSRX4);
+  SpeedControllerGroup1 = std::make_shared<frc::SpeedControllerGroup>(*TalonSRX1, *VictorSPX2);
+  SpeedControllerGroup2 = std::make_shared<frc::SpeedControllerGroup>(*TalonSRX3, *VictorSPX4);
 
   //frc::DifferentialDrive m_robotDrive{SpeedControllerGroup1, SpeedControllerGroup2};
   m_robotDrive.reset(new frc::DifferentialDrive(*SpeedControllerGroup1, *SpeedControllerGroup2));
@@ -44,7 +44,7 @@ void ExampleSubsystem::InitDefaultCommand() {
 }
 
 void ExampleSubsystem::Periodic(){
-  m_robotDrive -> ArcadeDrive(-joystick1->GetX(), joystick1->GetX());
+  m_robotDrive -> ArcadeDrive(-joystick1->GetX(), joystick1->GetY());
 }
 
 
