@@ -10,6 +10,8 @@
 #include <frc/commands/Subsystem.h>
 #include <frc/WPILib.h>
 #include <ctre/Phoenix.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
 
 class ExampleSubsystem : public frc::Subsystem {
  public:
@@ -29,6 +31,9 @@ class ExampleSubsystem : public frc::Subsystem {
   static std::shared_ptr<frc::SpeedControllerGroup> SpeedControllerGroup2;
 
   static std::shared_ptr<frc::DifferentialDrive>  m_robotDrive;
+
+
+  static std::shared_ptr<NetworkTable> limelight;
 
  private:
  

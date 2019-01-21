@@ -22,6 +22,8 @@ std::shared_ptr<frc::SpeedControllerGroup> ExampleSubsystem::SpeedControllerGrou
 
 std::shared_ptr<frc::DifferentialDrive> ExampleSubsystem::m_robotDrive;
 
+std::shared_ptr<NetworkTable> limelight;
+
 ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   joystick1.reset(new frc::Joystick(0));
   joystick2.reset(new frc::Joystick(1));
@@ -37,6 +39,8 @@ ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
 
   //frc::DifferentialDrive m_robotDrive{SpeedControllerGroup1, SpeedControllerGroup2};
   m_robotDrive.reset(new frc::DifferentialDrive(*SpeedControllerGroup1, *SpeedControllerGroup2));
+
+  limelight = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
 
 }
 
