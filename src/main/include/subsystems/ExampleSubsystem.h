@@ -18,6 +18,7 @@ class ExampleSubsystem : public frc::Subsystem {
   void Periodic() override;
   
   static std::shared_ptr<frc::Joystick> joystick1;
+  static std::shared_ptr<frc::Joystick> joystick2;
 
   static std::shared_ptr<WPI_TalonSRX>  TalonSRX1;
   static std::shared_ptr<WPI_VictorSPX>  VictorSPX2;

@@ -23,3 +23,9 @@
 // number and the module. For example you with a rangefinder:
 // constexpr int kRangeFinderPort = 1;
 // constexpr int kRangeFinderModule = 1;
+
+constexpr int kTalonSRX1 = 4;
+constexpr int kTalonSRX2 = 1;
+
+constexpr int KVictor1 = 2;
+constexpr int KVictor2 = 3;

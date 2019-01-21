@@ -10,6 +10,7 @@
 #include "RobotMap.h"
 
 std::shared_ptr<frc::Joystick> ExampleSubsystem::joystick1;
+std::shared_ptr<frc::Joystick> ExampleSubsystem::joystick2;
 
 std::shared_ptr<WPI_TalonSRX> ExampleSubsystem::TalonSRX1;
 std::shared_ptr<WPI_VictorSPX> ExampleSubsystem::VictorSPX2;
@@ -23,12 +24,13 @@ std::shared_ptr<frc::DifferentialDrive> ExampleSubsystem::m_robotDrive;
 
 ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   joystick1.reset(new frc::Joystick(0));
+  joystick2.reset(new frc::Joystick(1));
 
-  TalonSRX1.reset(new WPI_TalonSRX(0));
-  VictorSPX2.reset(new WPI_VictorSPX(1));
+  TalonSRX1.reset(new WPI_TalonSRX(4));
+  VictorSPX2.reset(new WPI_VictorSPX(3));
   //2 spx follow 2 srx mastermode
-  TalonSRX3.reset(new WPI_TalonSRX(2));
-  VictorSPX4.reset(new WPI_VictorSPX(3));
+  TalonSRX3.reset(new WPI_TalonSRX(1));
+  VictorSPX4.reset(new WPI_VictorSPX(2));
 
   SpeedControllerGroup1 = std::make_shared<frc::SpeedControllerGroup>(*TalonSRX1, *VictorSPX2);
   SpeedControllerGroup2 = std::make_shared<frc::SpeedControllerGroup>(*TalonSRX3, *VictorSPX4);
@@ -43,8 +45,22 @@ void ExampleSubsystem::InitDefaultCommand() {
   // SetDefaultCommand(new MySpecialCommand());
 }
 
+inline double abs(double x) 
+{
+  if(x<0)return -x;
+  else return x;
+}
+
+double suoqu(double x)
+{
+  if(abs(x) <= 0.14)  return 0.0;
+  else return x;
+}
+
 void ExampleSubsystem::Periodic(){
-  m_robotDrive -> ArcadeDrive(-joystick1->GetX(), joystick1->GetY());
+ // SpeedControllerGroup1 -> Set(-joystick1->GetY());
+ // SpeedControllerGroup2 -> Set(joystick2->GetY());
+  m_robotDrive -> ArcadeDrive(suoqu(joystick1->GetY()), suoqu(joystick1->GetX()));
 }
 
 
