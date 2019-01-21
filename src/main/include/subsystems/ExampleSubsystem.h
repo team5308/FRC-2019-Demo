@@ -34,6 +34,9 @@ class ExampleSubsystem : public frc::Subsystem {
 
 
   static std::shared_ptr<NetworkTable> limelight;
+  
+  float tx;
+  float ty;
 
  private:
  

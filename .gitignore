@@ -165,3 +165,4 @@ settings.gradle
 build.gradle
 
 vendordeps/
+*.json
