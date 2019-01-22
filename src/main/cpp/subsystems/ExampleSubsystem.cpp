@@ -24,6 +24,8 @@ std::shared_ptr<frc::DifferentialDrive> ExampleSubsystem::m_robotDrive;
 
 std::shared_ptr<NetworkTable> ExampleSubsystem::limelight = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
 
+std::shared_ptr<frc::DigitalInput> ExampleSubsystem::magLimitSwitch;
+
 ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   joystick1.reset(new frc::Joystick(0));
   joystick2.reset(new frc::Joystick(1));
@@ -40,6 +42,7 @@ ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   //frc::DifferentialDrive m_robotDrive{SpeedControllerGroup1, SpeedControllerGroup2};
   m_robotDrive.reset(new frc::DifferentialDrive(*SpeedControllerGroup1, *SpeedControllerGroup2));
 
+  magLimitSwitch.reset(new frc::DigitalInput(5));
 }
 
 void ExampleSubsystem::InitDefaultCommand() {
@@ -65,8 +68,14 @@ void ExampleSubsystem::Periodic(){
  tx = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0);
  ty = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0.0);
   printf("tx: %2.4f, ty: %2.4f\n", tx, ty);
-  SpeedControllerGroup1 -> Set(0.01*tx); 
-  SpeedControllerGroup2 -> Set(0.01*tx);
+  //SpeedControllerGroup1 -> Set(0.01*tx); 
+  //SpeedControllerGroup2 -> Set(0.01*tx);
+
+  if(magLimitSwitch->Get())
+  {
+    printf("Mag Get True!\n");
+  }
+
 
 
   // while(abs(tx) >= 5)

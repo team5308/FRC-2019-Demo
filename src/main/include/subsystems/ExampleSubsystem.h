@@ -13,6 +13,8 @@
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
 
+#include <frc/WPILib.h>
+
 class ExampleSubsystem : public frc::Subsystem {
  public:
   ExampleSubsystem();
@@ -35,6 +37,7 @@ class ExampleSubsystem : public frc::Subsystem {
 
   static std::shared_ptr<NetworkTable> limelight;
   
+  static std::shared_ptr<frc::DigitalInput> magLimitSwitch;
   float tx;
   float ty;
 
