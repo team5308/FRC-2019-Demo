@@ -67,14 +67,14 @@ void ExampleSubsystem::Periodic(){
  // SpeedControllerGroup2 -> Set(joystick2->GetY());
  tx = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0);
  ty = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0.0);
-  printf("tx: %2.4f, ty: %2.4f\n", tx, ty);
-  //SpeedControllerGroup1 -> Set(0.01*tx); 
-  //SpeedControllerGroup2 -> Set(0.01*tx);
+  // printf("tx: %2.4f, ty: %2.4f\n", tx, ty);
+  // //SpeedControllerGroup1 -> Set(0.01*tx); 
+  // //SpeedControllerGroup2 -> Set(0.01*tx);
 
-  if(magLimitSwitch->Get())
-  {
-    printf("Mag Get True!\n");
-  }
+  // if(magLimitSwitch->Get())
+  // {
+  //   printf("Mag Get True!\n");
+  // }
 
 
 

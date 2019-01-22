@@ -15,11 +15,13 @@
 #include "commands/ExampleCommand.h"
 #include "commands/MyAutoCommand.h"
 #include "subsystems/ExampleSubsystem.h"
+#include "subsystems/Vision.h"
 
 class Robot : public frc::TimedRobot {
  public:
   static ExampleSubsystem m_subsystem;
   static OI m_oi;
+  static Vision visionSubsystem;
 
   void RobotInit() override;
   void RobotPeriodic() override;
@@ -38,4 +40,6 @@ class Robot : public frc::TimedRobot {
   ExampleCommand m_defaultAuto;
   MyAutoCommand m_myAuto;
   frc::SendableChooser<frc::Command*> m_chooser;
+
+  // cs::HttpCamera pipeline;
 };
