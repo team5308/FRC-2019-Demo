@@ -6,8 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/ExampleSubsystem.h"
-
 #include "RobotMap.h"
+
 
 std::shared_ptr<frc::Joystick> ExampleSubsystem::joystick1;
 std::shared_ptr<frc::Joystick> ExampleSubsystem::joystick2;
@@ -26,6 +26,7 @@ std::shared_ptr<NetworkTable> ExampleSubsystem::limelight = nt::NetworkTableInst
 
 std::shared_ptr<frc::DigitalInput> ExampleSubsystem::magLimitSwitch;
 
+std::shared_ptr<frc::JoystickButton> ExampleSubsystem::joyButton;
 ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   joystick1.reset(new frc::Joystick(0));
   joystick2.reset(new frc::Joystick(1));
@@ -43,6 +44,12 @@ ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   m_robotDrive.reset(new frc::DifferentialDrive(*SpeedControllerGroup1, *SpeedControllerGroup2));
 
   magLimitSwitch.reset(new frc::DigitalInput(5));
+  visionPID.setPara(0.018,0,0);
+  hatchPID.setPara(0.0014,0.0003,0);
+
+  joyButton.reset(new frc::JoystickButton(joystick1.get(),3));
+
+  
 }
 
 void ExampleSubsystem::InitDefaultCommand() {
@@ -50,7 +57,7 @@ void ExampleSubsystem::InitDefaultCommand() {
   // SetDefaultCommand(new MySpecialCommand());
 }
 
-inline double abs(double x) 
+inline double aabs(double x) 
 {
   if(x<0)return -x;
   else return x;
@@ -58,20 +65,42 @@ inline double abs(double x)
 
 double suoqu(double x)
 {
-  if(abs(x) <= 0.14)  return 0.0;
+  if(aabs(x) <= 0.14)  return 0.0;
   else return x;
 }
 
+void ExampleSubsystem::hatchPIDTest() {
+  tx = Vision::GetDX();
+  printf("Vision, Get X %.2f\n", tx);
+  
+  hatchPID.push(tx);
+  tx = hatchPID.outputValue;
+  hatchPID.info();
+
+  SpeedControllerGroup1 -> Set(tx); 
+  SpeedControllerGroup2 -> Set(tx);
+
+}
+
 void ExampleSubsystem::Periodic(){
- // SpeedControllerGroup1 -> Set(-joystick1->GetY());
- // SpeedControllerGroup2 -> Set(joystick2->GetY());
+ // hatchPIDTest();
+ // return ;
+//  SpeedControllerGroup1 -> Set(-joystick1->GetY());
+//  SpeedControllerGroup2 -> Set(joystick2->GetY());
  tx = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0);
  ty = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0.0);
-  // printf("tx: %2.4f, ty: %2.4f\n", tx, ty);
-  // //SpeedControllerGroup1 -> Set(0.01*tx); 
-  // //SpeedControllerGroup2 -> Set(0.01*tx);
-
-  // if(magLimitSwitch->Get())
+  
+//   // tx = Vision::GetDX();
+//   // printf("tx:%f\n",tx);
+//   printf("tx: %2.4f, ty: %2.4f\n", tx, ty);
+ visionPID.push(tx);
+  tx = visionPID.outputValue;
+  double hy = suoqu(joystick1 -> GetY());
+  if(joyButton->Get()) {
+    SpeedControllerGroup1 -> Set(tx); 
+    SpeedControllerGroup2 -> Set(tx);
+  }else{
+  // if(gLimitSwitch->Get())
   // {
   //   printf("Mag Get True!\n");
   // }
@@ -83,8 +112,9 @@ void ExampleSubsystem::Periodic(){
   //   SpeedControllerGroup1 -> Set(0.15); 
   //   SpeedControllerGroup2 -> Set(0.15);
   // }
-  // SpeedControllerGroup2 -> Set(0.09*tx);
- // m_robotDrive -> ArcadeDrive(suoqu(joystick1->GetY()), suoqu(joystick1->GetX()));
+  //SpeedControllerGroup2 -> Set(0.09*tx);
+  m_robotDrive -> ArcadeDrive(suoqu(joystick1->GetY()), suoqu(joystick1->GetX()));
+  }
 }
 
 

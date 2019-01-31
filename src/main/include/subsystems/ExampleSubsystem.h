@@ -15,6 +15,10 @@
 
 #include <frc/WPILib.h>
 
+#include "subsystems/Vision.h"
+
+#include "BasicPID.h"
+
 class ExampleSubsystem : public frc::Subsystem {
  public:
   ExampleSubsystem();
@@ -41,8 +45,13 @@ class ExampleSubsystem : public frc::Subsystem {
   float tx;
   float ty;
 
+  static std::shared_ptr<frc::JoystickButton> joyButton;
+
+  BasicPID visionPID;
+  BasicPID hatchPID;
+
  private:
- 
+ void hatchPIDTest();
 
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
