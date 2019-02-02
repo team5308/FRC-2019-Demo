@@ -27,6 +27,9 @@ std::shared_ptr<NetworkTable> ExampleSubsystem::limelight = nt::NetworkTableInst
 std::shared_ptr<frc::DigitalInput> ExampleSubsystem::magLimitSwitch;
 
 std::shared_ptr<frc::JoystickButton> ExampleSubsystem::joyButton;
+
+std::shared_ptr<rev::CANSparkMax> ExampleSubsystem::spkMax;
+
 ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   joystick1.reset(new frc::Joystick(0));
   joystick2.reset(new frc::Joystick(1));
@@ -49,6 +52,7 @@ ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
 
   joyButton.reset(new frc::JoystickButton(joystick1.get(),3));
 
+  spkMax.reset(new rev::CANSparkMax(0, rev::CANSparkMaxLowLevel::MotorType::kBrushed));
   
 }
 
@@ -83,8 +87,19 @@ void ExampleSubsystem::hatchPIDTest() {
 }
 
 void ExampleSubsystem::Periodic(){
- // hatchPIDTest();
- // return ;
+
+  double tty = suoqu(joystick1->GetThrottle());
+  printf("%.2f\n",  tty);
+
+if(joyButton->Get()) {
+//  hatchPIDTest();
+  spkMax -> Set(tty);
+ return ;
+}
+else{
+  spkMax -> Set(0);
+  return ;
+}
 //  SpeedControllerGroup1 -> Set(-joystick1->GetY());
 //  SpeedControllerGroup2 -> Set(joystick2->GetY());
  tx = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0);
@@ -96,7 +111,7 @@ void ExampleSubsystem::Periodic(){
  visionPID.push(tx);
   tx = visionPID.outputValue;
   double hy = suoqu(joystick1 -> GetY());
-  if(joyButton->Get()) {
+  if(joyButton->Get() && false) {
     SpeedControllerGroup1 -> Set(tx); 
     SpeedControllerGroup2 -> Set(tx);
   }else{

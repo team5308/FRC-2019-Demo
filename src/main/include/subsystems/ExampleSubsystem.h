@@ -12,6 +12,7 @@
 #include <ctre/Phoenix.h>
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
+#include <rev/CANSparkMax.h>
 
 #include <frc/WPILib.h>
 
@@ -46,6 +47,8 @@ class ExampleSubsystem : public frc::Subsystem {
   float ty;
 
   static std::shared_ptr<frc::JoystickButton> joyButton;
+
+  static std::shared_ptr<rev::CANSparkMax> spkMax;
 
   BasicPID visionPID;
   BasicPID hatchPID;
