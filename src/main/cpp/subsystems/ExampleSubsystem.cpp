@@ -30,6 +30,9 @@ std::shared_ptr<frc::JoystickButton> ExampleSubsystem::joyButton;
 
 std::shared_ptr<rev::CANSparkMax> ExampleSubsystem::spkMax;
 
+std::shared_ptr<frc::Encoder> ExampleSubsystem::bencdl;
+std::shared_ptr<frc::Encoder> ExampleSubsystem::bencdr;
+
 ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   joystick1.reset(new frc::Joystick(0));
   joystick2.reset(new frc::Joystick(1));
@@ -52,8 +55,10 @@ ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
 
   joyButton.reset(new frc::JoystickButton(joystick1.get(),3));
 
-  spkMax.reset(new rev::CANSparkMax(0, rev::CANSparkMaxLowLevel::MotorType::kBrushed));
+  spkMax.reset(new rev::CANSparkMax(0, rev::CANSparkMaxLowLevel::MotorType::kBrushless));
   
+  // bencdl.reset(new frc::Encoder(3, ));
+
 }
 
 void ExampleSubsystem::InitDefaultCommand() {
@@ -93,7 +98,7 @@ void ExampleSubsystem::Periodic(){
 
 if(joyButton->Get()) {
 //  hatchPIDTest();
-  spkMax -> Set(tty);
+  VictorSPX4 -> Set(tty);
  return ;
 }
 else{
@@ -108,27 +113,14 @@ else{
 //   // tx = Vision::GetDX();
 //   // printf("tx:%f\n",tx);
 //   printf("tx: %2.4f, ty: %2.4f\n", tx, ty);
- visionPID.push(tx);
+  visionPID.push(tx);
   tx = visionPID.outputValue;
   double hy = suoqu(joystick1 -> GetY());
   if(joyButton->Get() && false) {
     SpeedControllerGroup1 -> Set(tx); 
     SpeedControllerGroup2 -> Set(tx);
   }else{
-  // if(gLimitSwitch->Get())
-  // {
-  //   printf("Mag Get True!\n");
-  // }
-
-
-
-  // while(abs(tx) >= 5)
-  // {
-  //   SpeedControllerGroup1 -> Set(0.15); 
-  //   SpeedControllerGroup2 -> Set(0.15);
-  // }
-  //SpeedControllerGroup2 -> Set(0.09*tx);
-  m_robotDrive -> ArcadeDrive(suoqu(joystick1->GetY()), suoqu(joystick1->GetX()));
+    m_robotDrive -> ArcadeDrive(suoqu(joystick1->GetY()), suoqu(joystick1->GetX()));
   }
 }
 
