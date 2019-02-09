@@ -166,3 +166,4 @@ build.gradle
 
 vendordeps/
 *.json
+*.json

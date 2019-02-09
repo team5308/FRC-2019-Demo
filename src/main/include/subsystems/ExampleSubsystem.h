@@ -13,6 +13,7 @@
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
 #include <rev/CANSparkMax.h>
+#include <rev/SparkMax.h>
 
 #include <frc/WPILib.h>
 
@@ -25,6 +26,8 @@ class ExampleSubsystem : public frc::Subsystem {
   ExampleSubsystem();
   void InitDefaultCommand() override;
   void Periodic() override;
+
+  static std::shared_ptr<rev::SparkMax> sparkMax;
   
   static std::shared_ptr<frc::Joystick> joystick1;
   static std::shared_ptr<frc::Joystick> joystick2;
@@ -53,6 +56,8 @@ class ExampleSubsystem : public frc::Subsystem {
 
   static std::shared_ptr<rev::CANSparkMax> spkMax;
 
+
+  static std::shared_ptr<frc::SpeedControllerGroup> shootContorller;
   BasicPID visionPID;
   BasicPID hatchPID;
 

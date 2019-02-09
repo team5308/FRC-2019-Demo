@@ -33,6 +33,10 @@ std::shared_ptr<rev::CANSparkMax> ExampleSubsystem::spkMax;
 std::shared_ptr<frc::Encoder> ExampleSubsystem::bencdl;
 std::shared_ptr<frc::Encoder> ExampleSubsystem::bencdr;
 
+std::shared_ptr<rev::SparkMax> ExampleSubsystem::sparkMax;
+
+std::shared_ptr<frc::SpeedControllerGroup> ExampleSubsystem::shootContorller;
+
 ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   joystick1.reset(new frc::Joystick(0));
   joystick2.reset(new frc::Joystick(1));
@@ -43,8 +47,13 @@ ExampleSubsystem::ExampleSubsystem() : frc::Subsystem("ExampleSubsystem") {
   TalonSRX3.reset(new WPI_TalonSRX(1));
   VictorSPX4.reset(new WPI_VictorSPX(2));
 
+  sparkMax.reset(new rev::SparkMax(5));
+
   SpeedControllerGroup1 = std::make_shared<frc::SpeedControllerGroup>(*TalonSRX1, *VictorSPX2);
   SpeedControllerGroup2 = std::make_shared<frc::SpeedControllerGroup>(*TalonSRX3, *VictorSPX4);
+
+  VictorSPX2->SetInverted(true);
+  shootContorller = std::make_shared<frc::SpeedControllerGroup>(*VictorSPX4, *VictorSPX2);
 
   //frc::DifferentialDrive m_robotDrive{SpeedControllerGroup1, SpeedControllerGroup2};
   m_robotDrive.reset(new frc::DifferentialDrive(*SpeedControllerGroup1, *SpeedControllerGroup2));
@@ -93,8 +102,34 @@ void ExampleSubsystem::hatchPIDTest() {
 
 void ExampleSubsystem::Periodic(){
 
-  double tty = suoqu(joystick1->GetThrottle());
+  
+
+  double tty = joystick1->GetThrottle();
   printf("%.2f\n",  tty);
+
+  if(joystick1->GetRawButton(11))
+  {
+    shootContorller -> Set(tty);
+    printf("yes\n");
+  }
+  else
+  {
+    shootContorller -> Set(0);
+  }
+
+  if(joystick1->GetRawButton(9))
+  {
+    sparkMax -> Set(tty);
+    printf("SparkMax Activated!\n");
+  }
+  else
+  {
+    sparkMax -> Set(0);
+  }
+  
+  return ;
+  
+  
 
 if(joyButton->Get()) {
 //  hatchPIDTest();
