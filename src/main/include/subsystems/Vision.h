@@ -22,16 +22,23 @@ class Vision : public frc::Subsystem {
   cs::UsbCamera cam;
   cs::CvSink cvSink;
   cs::CvSource outputStream;
+  cs::CvSource testStream;
   cv::Mat img;
   cv::Mat hsv_img;
   // cv::OutputArrayOfArrays contoursArray;
   std::vector< std::vector<cv::Point> > contours;
+  static int dx, dy;
 
   // cv::OutputArray hireArray;
  public:
   Vision();
   void InitDefaultCommand() override;
   void Periodic() override;
+
+  void handleData();
+
+  static double GetDX();
+  static double GetDY();
 
   
 };

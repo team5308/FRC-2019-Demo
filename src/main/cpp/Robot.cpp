@@ -20,6 +20,8 @@ void Robot::RobotInit() {
   m_chooser.AddOption("My Auto", &m_myAuto);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
   // pipeline = frc::CameraServer::GetInstance()->AddCamera("10.58.3.11");
+  std::thread visionThread(&Vision::handleData, &visionSubsystem);
+  visionThread.detach();
 }
 
 /**

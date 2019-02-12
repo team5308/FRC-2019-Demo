@@ -12,14 +12,22 @@
 #include <ctre/Phoenix.h>
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableInstance.h>
+#include <rev/CANSparkMax.h>
+#include <rev/SparkMax.h>
 
 #include <frc/WPILib.h>
+
+#include "subsystems/Vision.h"
+
+#include "BasicPID.h"
 
 class ExampleSubsystem : public frc::Subsystem {
  public:
   ExampleSubsystem();
   void InitDefaultCommand() override;
   void Periodic() override;
+
+  static std::shared_ptr<rev::SparkMax> sparkMax;
   
   static std::shared_ptr<frc::Joystick> joystick1;
   static std::shared_ptr<frc::Joystick> joystick2;
@@ -32,6 +40,9 @@ class ExampleSubsystem : public frc::Subsystem {
   static std::shared_ptr<WPI_VictorSPX>  VictorSPX4;
   static std::shared_ptr<frc::SpeedControllerGroup> SpeedControllerGroup2;
 
+  static std::shared_ptr<frc::Encoder> bencdl;
+  static std::shared_ptr<frc::Encoder> bencdr;
+
   static std::shared_ptr<frc::DifferentialDrive>  m_robotDrive;
 
 
@@ -41,8 +52,17 @@ class ExampleSubsystem : public frc::Subsystem {
   float tx;
   float ty;
 
+  static std::shared_ptr<frc::JoystickButton> joyButton;
+
+  static std::shared_ptr<rev::CANSparkMax> spkMax;
+
+
+  static std::shared_ptr<frc::SpeedControllerGroup> shootContorller;
+  BasicPID visionPID;
+  BasicPID hatchPID;
+
  private:
- 
+ void hatchPIDTest();
 
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities

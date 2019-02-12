@@ -10,6 +10,7 @@
 #include <frc/TimedRobot.h>
 #include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <thread>
 
 #include "OI.h"
 #include "commands/ExampleCommand.h"
