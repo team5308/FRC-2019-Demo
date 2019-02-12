@@ -63,8 +63,8 @@ double suoqu(double x)
 }
 
 void ExampleSubsystem::Periodic(){
- // SpeedControllerGroup1 -> Set(-joystick1->GetY());
- // SpeedControllerGroup2 -> Set(joystick2->GetY());
+//  SpeedControllerGroup1 -> Set(joystixck1->GetY());
+//  SpeedControllerGroup2 -> Set(joystick2->GetY());
  tx = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0);
  ty = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0.0);
   // printf("tx: %2.4f, ty: %2.4f\n", tx, ty);
@@ -74,7 +74,7 @@ void ExampleSubsystem::Periodic(){
   // if(magLimitSwitch->Get())
   // {
   //   printf("Mag Get True!\n");
-  // }
+  // } 
 
 
 
@@ -84,7 +84,7 @@ void ExampleSubsystem::Periodic(){
   //   SpeedControllerGroup2 -> Set(0.15);
   // }
   // SpeedControllerGroup2 -> Set(0.09*tx);
- // m_robotDrive -> ArcadeDrive(suoqu(joystick1->GetY()), suoqu(joystick1->GetX()));
+ m_robotDrive -> ArcadeDrive(suoqu(joystick1->GetY()), suoqu(joystick1->GetX()));
 }
 
 

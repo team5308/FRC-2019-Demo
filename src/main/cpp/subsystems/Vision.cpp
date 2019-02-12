@@ -29,6 +29,7 @@ void Vision::InitDefaultCommand() {
 
 void Vision::Periodic()
 {
+  if(false){
   if(cvSink.GrabFrame(img)!=0)
   {
     cv::GaussianBlur(img, img, cv::Size(9,9), 0);
@@ -40,9 +41,10 @@ void Vision::Periodic()
     {
       
     }
-    
+
 
     outputStream.PutFrame(hsv_img);
+  }
     printf("Fucking Suc!\n");
   }
   else
